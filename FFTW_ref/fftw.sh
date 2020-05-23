@@ -26,8 +26,7 @@ NATIVE_GCC_FLAGS='"-march=native -mtune=native -mavx2 -msse4.2 -O3 -DNDEBUG"' \
 GCC_FLAGS='"-march=broadwell -mtune=broadwell -mavx2 -msse4.2 -O3 -DNDEBUG"' \
 ICC_FLAGS='"-xBROADWELL -axBROADWELL,CORE-AVX2,SSE4.2 -O3 -DNDEBUG"' \
 
-CMD_REBUILD_CODE_DIR="rm -fr $CODE_DIR \
-&& tar xf $HOME/code/$CODE_NAME-$CODE_TAG.tar.gz -C $CODE_BASE_DIR"
+CMD_REBUILD_CODE_DIR="rm -fr $CODE_DIR && tar xf $HOME/code/$CODE_NAME-$CODE_TAG.tar.gz -C $CODE_BASE_DIR"
 
 ### To build shared library (single precision) with GNU Compiler
 BUILD_LABEL=$CODE_TAG-shared-gcc840-avx2-broadwell \
