@@ -6,8 +6,8 @@ FROM ubuntu:16.04
 
 # install packages
 RUN apt update && apt install -y \
-	vim git wget ssh net-tools locate \
-	environment-modules tcl python3 curl \
+	vim tmux locate environment-modules tcl python3 \
+	git wget curl ssh net-tools \
 	gcc g++ gfortran make cmake autoconf automake
 
 WORKDIR /root
@@ -21,6 +21,11 @@ ENV CHARM_URL=https://github.com/UIUC-PPL/charm.git \
 ENV SOURCE_DIR=/root
 RUN mkdir -p ${SOURCE_DIR}
 
+# GCC 8.4.0
+ARG GCC_SRCIPT=gcc8.sh
+COPY ${GCC_SRCIPT} ${SOURCE_DIR}
+RUN source ${SOURCE_DIR}/${FFTW_SCRIPT}
+
 # FFTW 3.3.8
 ARG FFTW_SCRIPT=fftw_gcc.sh
 COPY ${FFTW_SCRIPT} ${SOURCE_DIR}
@@ -28,7 +33,7 @@ RUN wget ${FFTW_URL} -O - | tar -xzC ${SOURCE_DIR}
 RUN source ${SOURCE_DIR}/${FFTW_SCRIPT}
 
 # HPC-X 2.6
-RUN wget ${HPCX_URL} -O - | tar -xzC ${SOURCE_DIR}
+RUN wget ${HPCX_URL} -O - | tar -xjC ${SOURCE_DIR}
 
 # Charm++ 6.10.1
 ARG CHARM_SCRIPT=charm_mpi_gcc.sh
