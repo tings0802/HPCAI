@@ -1,5 +1,5 @@
 # Author: Shih, Yu-Ting
-# Date: 2020/05/23 Sat.
+# Date: 2020/05/27 Tue.
 # Desc: build NAMD on Untuntu 16.04
 
 FROM ubuntu:16.04
