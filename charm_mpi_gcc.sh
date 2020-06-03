@@ -5,12 +5,12 @@
 
 # Get source codes
 CODE_NAME=charm
-GIT_DIR=${SOURCE_DIR}/${CODE_NAME}.git
+GIT_DIR=${WORK_DIR}/${CODE_NAME}.git
 git clone --bare ${CHARM_URL} ${GIT_DIR}
 
 # Checkout Charm++ v6.10.1
 GIT_TAG=v6.10.1
-WORK_TREE=${SOURCE_DIR}
+WORK_TREE=${WORK_DIR}
 CODE_DIR=${WORK_TREE}/${CODE_NAME}-${GIT_TAG}
 mkdir -p ${WORK_TREE} ${CODE_DIR}
 git --bare --git-dir=${GIT_DIR} fetch --all --prune
@@ -20,9 +20,9 @@ git --bare --git-dir=${GIT_DIR} --work-tree=${WORK_TREE} checkout-index --force 
 
 # Build Charm++ v6.10.1
 CHARM_DIR=${CODE_DIR} \
-HPCX_DIR=${SOURCE_DIR}/hpcx-v2.6.0-gcc-MLNX_OFED_LINUX-4.7-1.0.0.1-ubuntu16.04-x86_64 \
+HPCX_DIR=${WORK_DIR}/hpcx-v2.6.0-gcc-MLNX_OFED_LINUX-4.7-1.0.0.1-ubuntu16.04-x86_64 \
 HPCX_MPI_DIR=$HPCX_DIR/ompi \
-GCC=/usr/bin/gcc \
+GCC=/usr/local/gcc-8.4.0/bin/gcc \
 NATIVE_GCC_FLAGS="-march=native -mtune=native -mavx2 -msse4.2 -O3 -DNDEBUG" \
 GCC_FLAGS="-static-libstdc++ -static-libgcc -march=broadwell -mtune=broadwell -mavx2 -msse4.2 -O3 -DNDEBUG" \
 

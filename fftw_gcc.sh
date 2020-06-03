@@ -5,8 +5,8 @@
 
 CODE_NAME=fftw \
 CODE_TAG=3.3.8 \
-CODE_DIR=${SOURCE_DIR}/$CODE_NAME-$CODE_TAG \
-INSTALL_DIR=${SOURCE_DIR}/$CODE_NAME-build \
+CODE_DIR=${WORK_DIR}/$CODE_NAME-$CODE_TAG \
+INSTALL_DIR=${WORK_DIR}/$CODE_NAME-build \
 CMAKE=/usr/bin/cmake \
 GCC=/usr/bin/gcc \
 NATIVE_GCC_FLAGS='"-march=native -mtune=native -mavx2 -msse4.2 -O3 -DNDEBUG"' \
@@ -30,6 +30,7 @@ CMD_BUILD_SHARED_GCC=" \
     && time -p make VERBOSE=1 V=1 install -j \
     && cd $INSTALL_DIR/$BUILD_LABEL && ln -s lib64 lib | tee $BUILD_LABEL.log "
 
+wget ${FFTW_URL} -O - | tar -xzC ${WORK_DIR}
 eval $CMD_BUILD_SHARED_GCC
 wait
 echo $CMD_BUILD_SHARED_GCC

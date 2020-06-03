@@ -1,11 +1,11 @@
 #!/bin/bash
 # Author: Shih, Yu-Ting
-# Date: 2020/05/27 Wed.
+# Date: 2020/05/28 Thu.
 # Desc: Install GCC 8.4.0 from source codes
 
 GCC_URL=https://bigsearcher.com/mirrors/gcc/releases/gcc-8.4.0/gcc-8.4.0.tar.gz
 APP_NAME=gcc-8.4.0
-ROOT_DIR=${HOME}
+ROOT_DIR=${WORK_DIR}
 SOURCE_DIR=${ROOT_DIR}/${APP_NAME}
 BUILD_DIR=${ROOT_DIR}/${APP_NAME}-build
 TAR_FILE=${ROOT_DIR}/${APP_NAME}.tar.gz
@@ -28,4 +28,4 @@ make -j $(nproc)
 make install -j $(nproc)
 
 # set environment path
-export PATH=${PATH}:${INSTALL_DIR}/bin
+# export PATH=${PATH}:${INSTALL_DIR}/bin
