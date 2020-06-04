@@ -8,14 +8,11 @@ APP_NAME=gcc-8.4.0
 ROOT_DIR=${WORK_DIR}
 SOURCE_DIR=${ROOT_DIR}/${APP_NAME}
 BUILD_DIR=${ROOT_DIR}/${APP_NAME}-build
-TAR_FILE=${ROOT_DIR}/${APP_NAME}.tar.gz
 
 mkdir -p ${ROOT_DIR} ${SOURCE_DIR} ${BUILD_DIR}
 
 # get sources
-wget ${GCC_URL} -O ${TAR_FILE}
-tar -xaf ${TAR_FILE} -C ${ROOT_DIR}
-# wget ${GCC_URL} -O - | tar -xzC ${ROOT_DIR}
+wget ${GCC_URL} -O - | tar -xzC ${ROOT_DIR}
 
 # install prerequisites
 unset LIBRARY_PATH CPATH C_INCLUDE_PATH PKG_CONFIG_PATH CPLUS_INCLUDE_PATH INCLUDE
