@@ -23,6 +23,3 @@ cd ${BUILD_DIR}
 ${SOURCE_DIR}/configure --prefix=/usr/local/${APP_NAME} --enable-threads=posix --disable-checking --disable-multilib
 make -j $(nproc)
 make install -j $(nproc)
-
-# set environment path
-# export PATH=${PATH}:${INSTALL_DIR}/bin

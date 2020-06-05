@@ -1,6 +1,6 @@
 #!/bin/bash
 # Author: Shih, Yu-Ting
-# Date: 2020/05/23 Sat.
+# Date: 2020/06/05 Fri.
 # Desc: build Charm++ v6.10.1 MPI executables with HPC-X OpenMPI and GCC 8.4.0
 
 # Get source codes
@@ -27,7 +27,10 @@ NATIVE_GCC_FLAGS="-march=native -mtune=native -mavx2 -msse4.2 -O3 -DNDEBUG" \
 GCC_FLAGS="-static-libstdc++ -static-libgcc -march=broadwell -mtune=broadwell -mavx2 -msse4.2 -O3 -DNDEBUG" \
 
 CMD_REBUILD_BUILD_DIR="rm -fr ${CHARM_DIR}/built && mkdir -p ${CHARM_DIR}/built;"
-# module purge && module load gcc/8.4.0 &&
+
+# source /etc/profile.d/modules.sh && module use ${MODULE_DIR}
+module purge && module load gcc/8.4.0
+
 CMD_BUILD_MPI_CHARM_GCC=" \
 	. $HPCX_DIR/hpcx-mt-init-ompi.sh \
 	&& hpcx_load \
