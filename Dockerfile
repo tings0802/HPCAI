@@ -3,6 +3,8 @@
 # Desc: build NAMD on Untuntu 16.04
 
 FROM ubuntu:16.04
+SHELL ["/bin/bash", "-c"]
+WORKDIR /root
 
 # install packages
 RUN apt update && apt install -y \
@@ -10,17 +12,14 @@ RUN apt update && apt install -y \
 	git wget curl ssh net-tools \
 	gcc g++ gfortran make cmake autoconf automake
 
-WORKDIR /root
-SHELL ["/bin/bash", "-c"]
-
-ENV CHARM_URL=https://github.com/UIUC-PPL/charm.git \
+ENV	WORK_DIR=/root \
+	CHARM_URL=https://github.com/UIUC-PPL/charm.git \
 	NAMD_URL=https://charm.cs.illinois.edu/gerrit/namd.git \
 	FFTW_URL=http://www.fftw.org/fftw-3.3.8.tar.gz \
 	HPCX_URL=http://content.mellanox.com/hpc/hpc-x/v2.6/hpcx-v2.6.0-gcc-MLNX_OFED_LINUX-4.7-1.0.0.1-ubuntu16.04-x86_64.tbz
 
-ENV WORK_DIR=/root \
-	SCRIPT_DIR=/root/scripts \
-	MODULE_DIR=/root/modules
+ENV SCRIPT_DIR=${WORK_DIR}/scripts \
+	MODULE_DIR=${WORK_DIR}/modules
 
 RUN mkdir -p ${WORK_DIR} ${SCRIPT_DIR} ${MODULE_DIR}
 
@@ -37,7 +36,7 @@ RUN source ${SCRIPT_DIR}/gcc8.sh
 RUN source ${SCRIPT_DIR}/fftw_gcc.sh
 
 # HPC-X 2.6
-RUN wget ${HPCX_URL} -O - | tar -xjC ${SCRIPT_DIR}
+RUN wget ${HPCX_URL} -O - | tar -xjC ${WORK_DIR}
 
 # Environment Modules
 CMD source /etc/profile.d/modules.sh && module use ${MODULE_DIR} && bash

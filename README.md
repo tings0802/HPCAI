@@ -1,4 +1,4 @@
-# NAMD-Dockerfiles
+# NAMD-Unbuntu16.04
 Dockerfiles for 2020 HPC-AI Competition
 
 ```shell

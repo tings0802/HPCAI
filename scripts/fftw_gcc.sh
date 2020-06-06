@@ -1,20 +1,23 @@
 #!/bin/bash
 # Author: Shih, Yu-Ting
 # Date: 2020/05/22 Fri.
-# Desc: To build FFTW 3.3.8 shared library (single precision) with GNU Compiler
+# Desc: To build FFTW 3.3.8 shared library (single precision) with GNU Compiler 8.4.0
 
-CODE_NAME=fftw \
-CODE_TAG=3.3.8 \
-CODE_DIR=${WORK_DIR}/$CODE_NAME-$CODE_TAG \
-INSTALL_DIR=${WORK_DIR}/$CODE_NAME-build \
-CMAKE=/usr/bin/cmake \
-GCC=/usr/bin/gcc \
-NATIVE_GCC_FLAGS='"-march=native -mtune=native -mavx2 -msse4.2 -O3 -DNDEBUG"' \
-GCC_FLAGS='"-march=broadwell -mtune=broadwell -mavx2 -msse4.2 -O3 -DNDEBUG"' \
+CODE_NAME=fftw
+CODE_TAG=3.3.8
+CODE_DIR=${WORK_DIR}/$CODE_NAME-$CODE_TAG
+INSTALL_DIR=${WORK_DIR}/$CODE_NAME-build
+CMAKE=/usr/bin/cmake
+GCC=/usr/local/gcc-8.4.0/bin/gcc
+NATIVE_GCC_FLAGS='"-march=native -mtune=native -mavx2 -msse4.2 -O3 -DNDEBUG"'
+GCC_FLAGS='"-march=broadwell -mtune=broadwell -mavx2 -msse4.2 -O3 -DNDEBUG"'
 
-CMD_REBUILD_CODE_DIR="rm -fr $CODE_DIR && tar xf $CODE_DIR.tar.gz -C $CODE_BASE_DIR"
+function clean_fftw() {
+    rm -fr $CODE_DIR && tar xf $CODE_DIR.tar.gz -C $CODE_BASE_DIR
+}
 
-BUILD_LABEL=$CODE_TAG-shared-gcc840-avx2-broadwell \
+BUILD_LABEL=$CODE_TAG-shared-gcc840-avx2-broadwell
+
 CMD_BUILD_SHARED_GCC=" \
     mkdir -p $CODE_DIR/build-$BUILD_LABEL $INSTALL_DIR \
     && cd $CODE_DIR/build-$BUILD_LABEL \
