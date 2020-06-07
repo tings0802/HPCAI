@@ -1,0 +1,62 @@
+#%Module
+
+set fn      $ModulesCurrentModulefile
+set fn      [file normalize $ModulesCurrentModulefile]
+
+if {[file type $fn] eq "link"} {
+   set fn [ exec readlink -f $fn]
+}
+
+set mydir_base  [ file dirname $fn ]
+set mydir_base  [ file dirname $mydir_base ]
+set mydir       [ file normalize $mydir_base ]
+set hpcx_dir        $mydir
+set hpcx_mpi_dir    $hpcx_dir/ompi
+
+module-whatis   Mellanox HPC-X toolkit
+
+setenv HPCX_DIR             $hpcx_dir
+setenv HPCX_HOME            $hpcx_dir
+
+setenv HPCX_UCX_DIR         $hpcx_dir/ucx
+setenv HPCX_SHARP_DIR       $hpcx_dir/sharp
+setenv HPCX_HCOLL_DIR       $hpcx_dir/hcoll
+setenv HPCX_NCCL_RDMA_SHARP_PLUGIN_DIR  $hpcx_dir/nccl_rdma_sharp_plugin
+
+setenv HPCX_CLUSTERKIT_DIR  $hpcx_dir/clusterkit
+setenv HPCX_MPI_DIR         $hpcx_mpi_dir
+setenv HPCX_OSHMEM_DIR      $hpcx_mpi_dir
+setenv HPCX_IPM_DIR         $hpcx_mpi_dir/tests/ipm-2.0.6
+setenv HPCX_IPM_LIB         $hpcx_mpi_dir/tests/ipm-2.0.6/lib/libipm.so
+setenv HPCX_MPI_TESTS_DIR   $hpcx_mpi_dir/tests
+setenv HPCX_OSU_DIR         $hpcx_mpi_dir/tests/osu-micro-benchmarks-5.3.2
+setenv HPCX_OSU_CUDA_DIR    $hpcx_mpi_dir/tests/osu-micro-benchmarks-5.3.2-cuda
+
+
+prepend-path    PATH    $hpcx_dir/ucx/bin
+prepend-path    PATH    $hpcx_dir/hcoll/bin
+prepend-path    PATH    $hpcx_mpi_dir/tests/imb
+prepend-path    PATH    $hpcx_dir/clusterkit/bin
+
+prepend-path    LD_LIBRARY_PATH $hpcx_dir/ucx/lib
+prepend-path    LD_LIBRARY_PATH $hpcx_dir/ucx/lib/ucx
+prepend-path    LD_LIBRARY_PATH $hpcx_dir/hcoll/lib
+prepend-path    LD_LIBRARY_PATH $hpcx_dir/sharp/lib
+prepend-path    LD_LIBRARY_PATH $hpcx_dir/nccl_rdma_sharp_plugin/lib
+
+prepend-path    LIBRARY_PATH $hpcx_dir/ucx/lib
+prepend-path    LIBRARY_PATH $hpcx_dir/hcoll/lib
+prepend-path    LIBRARY_PATH $hpcx_dir/sharp/lib
+prepend-path    LIBRARY_PATH $hpcx_dir/nccl_rdma_sharp_plugin/lib
+
+prepend-path    CPATH   $hpcx_dir/hcoll/include
+prepend-path    CPATH   $hpcx_dir/sharp/include
+prepend-path    CPATH   $hpcx_dir/ucx/include
+prepend-path    CPATH   $hpcx_mpi_dir/include
+
+prepend-path    PKG_CONFIG_PATH $hpcx_dir/hcoll/lib/pkgconfig
+prepend-path    PKG_CONFIG_PATH $hpcx_dir/sharp/lib/pkgconfig
+prepend-path    PKG_CONFIG_PATH $hpcx_dir/ucx/lib/pkgconfig
+prepend-path    PKG_CONFIG_PATH $hpcx_dir/ompi/lib/pkgconfig
+
+prepend-path    MANPATH         $hpcx_mpi_dir/share/man
