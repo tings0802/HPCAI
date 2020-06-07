@@ -1,5 +1,5 @@
 #!/bin/bash
-# Author: Shih, Yu-Ting
+# Author: Yuting Shih
 # Date: 2020/05/22 Fri.
 # Desc: To build FFTW 3.3.8 shared library (single precision) with GNU Compiler 8.4.0
 

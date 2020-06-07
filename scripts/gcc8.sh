@@ -1,5 +1,5 @@
 #!/bin/bash
-# Author: Shih, Yu-Ting
+# Author: Yuting Shih
 # Date: 2020/05/28 Thu.
 # Desc: Install GCC 8.4.0 from source codes
 

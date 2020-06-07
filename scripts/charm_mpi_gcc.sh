@@ -1,6 +1,6 @@
 #!/bin/bash
-# Author: Shih, Yu-Ting
-# Date: 2020/06/05 Fri.
+# Author: Yuting Shih
+# Date: 2020/06/06 Sat.
 # Desc: build Charm++ v6.10.1 MPI executables with HPC-X OpenMPI and GCC 8.4.0
 
 CODE_NAME=charm
@@ -26,10 +26,6 @@ function clean() {
 }
 
 function prepare() {
-	MODULE_DIR=/root/modules
-	mkdir -p ${MODULE_DIR}/gcc
-	echo "#%Module" > ${MODULE_DIR}/gcc/8.4.0
-	echo "prepend-path	PATH /usr/local/gcc-8.4.0/bin" >> ${MODULE_DIR}/gcc/8.4.0
 	source /etc/profile.d/modules.sh
 	module use ${MODULE_DIR} ${HPCX_DIR}/modulefiles
 }
@@ -44,5 +40,6 @@ function build() {
 	module purge
 }
 
-prepare
-clone && time build
+# clean
+clone
+prepare && time build
