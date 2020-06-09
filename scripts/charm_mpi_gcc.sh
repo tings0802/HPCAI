@@ -27,7 +27,8 @@ function clean() {
 
 function prepare() {
 	source /etc/profile.d/modules.sh
-	module use ${MODULE_DIR} ${HPCX_DIR}/modulefiles
+	module use ${MODULE_DIR} 
+	# module use ${HPCX_DIR}/modulefiles
 }
 
 function build() {
