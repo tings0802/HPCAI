@@ -37,8 +37,8 @@ RUN source ${SCRIPT_DIR}/gcc8.sh
 # FFTW 3.3.8
 RUN source ${SCRIPT_DIR}/fftw_gcc.sh
 
-# OpenMPI 4.0.3
-RUN source ${SCRIPT_DIR}/ompi4.sh
+# OpenMPI 3.1.6, 3.0.6, and 4.0.3
+RUN source ${SCRIPT_DIR}/ompi.sh
 
 # HPC-X 2.6
 RUN wget ${HPCX_URL} -O - | tar -xjC ${WORK_DIR}
@@ -47,4 +47,4 @@ RUN wget ${HPCX_URL} -O - | tar -xjC ${WORK_DIR}
 # RUN source ${SCRIPT_DIR}/charm_mpi_gcc.sh
 
 # Environment Modules
-CMD source /etc/profile.d/modules.sh && module use ${MODULE_DIR} && bash
+CMD source /etc/profile.d/modules.sh && module use ${MODULE_DIR} ${HPCX_MODULE} && bash
